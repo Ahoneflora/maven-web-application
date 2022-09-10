@@ -8,9 +8,10 @@ node{
     stage('2test&build'){
     sh "${mavenHome}/bin/mvn install"
 }
+/*
     stage('3codequaty'){
     sh "${mavenHome}/bin/mvn sonar:sonar"
-    }          
+    }
     stage('4uploadArtifacts'){}
     //sh "${mavenHome}/bin/mvn deploy"
 }
@@ -27,10 +28,6 @@ node{
 
 regards,
 dominion system''', recipientProviders: [buildUser(), developers(), contributor()], subject: 'build status', to: 'visa-team@gmail.com'
-       
-   }
-       
-       
-       
-       
-       
+}       
+*/
+}
