@@ -1,0 +1,36 @@
+node{
+    def mavenHome = tool name : 'maven3.8.6'
+    stage('1clonecode'){
+        git "https://github.com/Ahoneflora/maven-web-application.git"
+        //sh "git clone https://github.com/Ahoneflora/maven-web-application.git"
+        //bat "git clone https://github.com/Ahoneflora/maven-web-application.git"
+    }
+    stage('2test&build'){
+    sh "${mavenHome}/bin/mvn install"
+}
+    stage('3codequaty'){
+    sh "${mavenHome}/bin/mvn sonar:sonar"
+    }          
+    stage('4uploadArtifacts'){}
+    //sh "${mavenHome}/bin/mvn deploy"
+}
+    stage('5deploy_uat'){
+        //deploy adapters: [tomcat9(credentialsId: 'tomcat-credential', path: '', url: 'http://54.89.189.166:8080/')], contextPath: null, war: 'targert/*war'
+
+}
+   stage('6deploy_prod'){
+    //deploy adapters: [tomcat9(credentialsId: 'tomcat-credential', path: '', url: 'http://54.89.189.166:8080/')], contextPath: null, war: 'targert/*war'
+   }
+   stage('Notification'){
+        //pipeline syntax
+       emailext body: '''build status for frontend application
+
+regards,
+dominion system''', recipientProviders: [buildUser(), developers(), contributor()], subject: 'build status', to: 'visa-team@gmail.com'
+       
+   }
+       
+       
+       
+       
+       
